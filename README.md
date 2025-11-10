@@ -164,7 +164,7 @@ This table stores the price and discount settings for each parking lot.
 
 ![database.png](/images/database.png)
 
-### Diagram 1:
+#### Diagram 1:
 
 ![/images/diagrama1.png](/images/diagrama1.png)
 
@@ -185,12 +185,12 @@ Parkings:
 
 ![/images/altDatabase2.png](/images/altDatabase2.png)
 
-### Diagram 2:
+#### Diagram 2:
 
 ![/images/diagrama2.png](/images/diagrama2.png)
 
 
-## Important
+#### Important
 To simplify the exercise, we will work with a single Parking table, which is the first proposed solution.
 
 
