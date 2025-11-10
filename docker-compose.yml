@@ -1,0 +1,40 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: parking_db
+      MYSQL_USER: parkinguser
+      MYSQL_PASSWORD: parkingpass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+
+  app:
+    build: .
+    container_name: parking-api
+    depends_on:
+      mysql:
+        condition: service_healthy #ESPERA QUE LA BASE DE DATOS ESTE ARRIBA PARA INICIAR LA APP
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_R2DBC_URL: r2dbc:mysql://mysql:3306/parking_db
+      SPRING_DATASOURCE_USERNAME: parkinguser
+      SPRING_DATASOURCE_PASSWORD: parkingpass
+    networks:
+      - backend
+
+volumes:
+  mysql_data:
+
+networks:
+  backend:
+    driver: bridge
