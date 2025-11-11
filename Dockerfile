@@ -2,6 +2,8 @@ FROM eclipse-temurin:17-alpine AS builder
 
 WORKDIR /app
 COPY . .
+RUN chmod +x gradlew
+RUN sed -i 's/\r$//' gradlew
 RUN ./gradlew clean build
 
 FROM eclipse-temurin:17-alpine
